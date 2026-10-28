@@ -1,0 +1,7 @@
+*.key
+*.pem
+.env
+.env.*
+/dreamdex
+/bin/
+/dist/
