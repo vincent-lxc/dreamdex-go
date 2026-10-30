@@ -98,14 +98,14 @@ error: order eth_call rejected: execution reverted
 
 ## Feedback
 
-The [feedback index](FEEDBACK.md) summarizes the live, read-only investigations. Individual reports:
+The [feedback index](FEEDBACK.md) summarizes the live, read-only investigations. All six reports were re-verified on 2026-10-30 and still reproduce. Individual reports:
 
-- [01 · Indexer mark freshness](feedback/01-stale-indexer-mark.md) — Major
-- [02 · Perps guide navigation](feedback/02-developers-overview-omits-perps.md) — Normal
-- [03 · REST network split](feedback/03-rest-network-split.md) — Normal
-- [04 · Voucher eligibility](feedback/04-voucher-eligibility-false-positive.md) — Major
-- [05 · Perp revert reference](feedback/05-perp-revert-reference.md) — Normal
-- [06 · Hideki STT onboarding](feedback/06-hideki-gas-onboarding.md) — Normal
+- [01 · Indexer mark freshness](feedback/01-stale-indexer-mark.md) — major; reproduced
+- [02 · Perps guide navigation](feedback/02-developers-overview-omits-perps.md) — normal; reproduced
+- [03 · REST network split](feedback/03-rest-network-split.md) — normal; reproduced
+- [04 · Voucher eligibility](feedback/04-voucher-eligibility-false-positive.md) — major; reproduced
+- [05 · Perp revert reference](feedback/05-perp-revert-reference.md) — normal; reproduced
+- [06 · Hideki STT onboarding](feedback/06-hideki-gas-onboarding.md) — normal; reproduced
 
 The full investigation, including checks that found no issue, is in [notes/dx-log.md](notes/dx-log.md).
 

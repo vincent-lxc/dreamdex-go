@@ -25,8 +25,17 @@ The public faucet page identifies **Testnet, Shannon**, and Quick Start explicit
 
 ## Evidence
 
+Re-verified 2026-10-30 03:35 UTC. The public faucet still labels Shannon, Quick Start still puts its STT guidance under chain 50312, and the Hideki RPC reports 50383. The Perps guide still documents the linked-bot app route. Raw response snippets:
+
+```text
+> **Getting testnet funds.** Trading on Somnia Shannon testnet (chain ID `50312`) needs test funds - no mainnet capital required:
+> * **STT (gas):** claim from the [Somnia testnet faucet](https://testnet.somnia.network/) (or the [Google Cloud Web3 faucet](https://cloud.google.com/application/web3/faucet/somnia)). You need STT to pay gas for any transaction.
+Testnet, Shannon
+{"jsonrpc":"2.0","id":1,"result":"0xc4cf"}
+```
+
 At 2026-10-28T08:07:22Z, the faucet URL returned HTTP 200 with an accessible page label `Experience Somnia’s Testnet, Shannon`. Quick Start said `STT (gas): claim from the Somnia testnet faucet` within its Shannon 50312 section. The RPC `eth_chainId` response was `{"result":"0xc4cf"}` at 2026-10-28T08:05:43Z. The Perps guide separately documents the app route for Hideki gas.
 
 ## Environment
 
-2026-10-28 UTC; public documentation and Somnia faucet page; Hideki chain 50383; REST GET and `eth_chainId` only; no faucet claim or transaction.
+2026-10-30 03:35 UTC; Somnia Tokyo testnet (Hideki, chain 50383); wallet: n/a, read-only; documentation/faucet GETs and `eth_chainId`; no faucet claim or transaction sent.

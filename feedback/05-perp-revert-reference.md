@@ -35,6 +35,14 @@ The linked page lists `0xd48c4403` under SpotPool errors but omits both perp sel
 
 ## Evidence
 
+Re-verified 2026-10-30 03:35 UTC. The linked Errors page search returned only the spot selector. Both fresh preflight methods returned the same allowance revert. Raw response snippets:
+
+```text
+| `0xd48c4403` | `ImmediateOrCancelNoFill()` | An `ImmediateOrCancel` order filled nothing at all. The book moved, or your price never crossed. |
+eth_call {"jsonrpc":"2.0","id":1,"error":{"code":3,"message":"execution reverted","data":"0x08c379a00000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000001d45524332303a20696e73756666696369656e7420616c6c6f77616e6365000000"}}
+eth_estimateGas {"jsonrpc":"2.0","id":1,"error":{"code":3,"message":"execution reverted","data":"0x08c379a00000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000001d45524332303a20696e73756666696369656e7420616c6c6f77616e6365000000"}}
+```
+
 During the 2026-10-28 08:05 UTC probe, the BTC pool `0x4181dd08e73bbcdd1ba3e615a18f6abd941b94c0` returned the same JSON-RPC error for `eth_call` and `eth_estimateGas`:
 
 ```json
@@ -45,4 +53,4 @@ The payload decodes as `Error("ERC20: insufficient allowance")`. Keccak-256 of t
 
 ## Environment
 
-2026-10-28 UTC; Hideki chain 50383; SDK 0.32.1 ABI; BTC perp; read-only `eth_call`, `eth_estimateGas`, and documentation GET; no private key or transaction.
+2026-10-30 03:35 UTC; Somnia Tokyo testnet (Hideki, chain 50383); wallet: `0x7262D22e91D38D9883275664D1dAEbca70a4CCe0` (plain `from` address); SDK 0.32.1 ABI; read-only `eth_call`, `eth_estimateGas`, and documentation GET; no transaction sent.

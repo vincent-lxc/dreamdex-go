@@ -54,6 +54,17 @@ Both accounts satisfy every check in SDK 0.32.1's eligibility implementation, im
 
 ## Evidence
 
+Re-verified 2026-10-30 03:36 UTC. The fixed-block command still reverts for both addresses: `{"jsonrpc":"2.0","id":1,"error":{"code":3,"message":"execution reverted","data":"0x3e31dcc2"}}`. Repeating all eligibility reads and both `claim()` calls at `latest` returned the same contradiction. At 03:41 UTC, `eth_blockNumber` returned `0x2314937`; pinning every read and both claims to that head block gave the same result. Raw response snippets:
+
+```text
+{"jsonrpc":"2.0","id":1,"result":"0x2314937"}
+0x7262D22e91D38D9883275664D1dAEbca70a4CCe0 active 0x00000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000000 mainFunded 0x0000000000000000000000000000000000000000000000000000000000000000 claimed 0x0000000000000000000000000000000000000000000000000000000000000000 claim {'code': 3, 'message': 'execution reverted', 'data': '0x3e31dcc2'}
+0x000000000000000000000000000000000000dEaD active 0x00000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000000 mainFunded 0x0000000000000000000000000000000000000000000000000000000000000000 claimed 0x0000000000000000000000000000000000000000000000000000000000000000 claim {'code': 3, 'message': 'execution reverted', 'data': '0x3e31dcc2'}
+```
+
+The npm registry returned `"version":"0.32.1"`, `"latest":"0.32.1"`, and `"canary":"0.32.2-canary.38575926931.ge4550933d36d"`. `active` decodes to an empty array; the config still has an active campaign and a 1,000 USDso grant, and the latest budget exceeds the grant. A GET of `llms-full.txt` and searches of both npm 0.32.1 and 0.32.2 canary package contents found no literal `0x3e31dcc2`. The canary eligibility implementation still checks the same six conditions as 0.32.1. The selector's meaning remains unidentified.
+
+
 At 2026-10-28T08:08:00Z, fixed block `35217141` (`0x2195ef5`; block timestamp `1793174880`), MarginBank's `getCreditGranter()` returned `0x2ACD9EFdA721450906bfE1bef3edE269636E42C4`. The campaign window was `[1790553600, 1798477478)`, grant `1000000000000000000000`, and remaining budget `219234000000000000000000000`.
 
 | Address | Active pools | Main-funded principal | Claimed | STT balance | SDK checks | `claim()` |
@@ -65,4 +76,4 @@ All eligibility reads and claim calls used the same block tag. Zero STT balance 
 
 ## Environment
 
-2026-10-28 UTC; Hideki chain 50383; SDK 0.32.1 eligibility source and ABI; two plain addresses; read-only `eth_call` and `eth_getBalance`; no transaction sent.
+2026-10-30 03:36–03:41 UTC; Somnia Tokyo testnet (Hideki, chain 50383); wallets: `0x7262D22e91D38D9883275664D1dAEbca70a4CCe0` and `0x000000000000000000000000000000000000dEaD` (plain `from` addresses); read-only `eth_call` and documentation GET. npm `latest` remains SDK 0.32.1; a newer prerelease is tagged `canary` at 0.32.2-canary.38575926931.ge4550933d36d. No transaction sent.

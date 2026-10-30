@@ -1,5 +1,13 @@
 # Developer experience investigation log
 
+## Pass 4 re-verification (2026-10-30)
+
+All six feedback reports still reproduced with their original read-only commands at 03:35–03:41 UTC. Item 01 additionally sampled BTC, ETH, SOL, DOGE, and AVAX three times at least 60 seconds apart: all five GraphQL marks and `markPriceUpdatedAt` values remained fixed, while all five live pool marks changed. Item 04's two `claim()` simulations still returned `0x3e31dcc2` at the original fixed block, `latest`, and fresh head block `0x2314937`; the eligibility reads at latest still met the SDK 0.32.1 checks. The selector was absent from the live `llms-full.txt` and the npm 0.32.1 and 0.32.2 canary package contents. npm `latest` was 0.32.1; the newer canary prerelease was `0.32.2-canary.38575926931.ge4550933d36d`. The other four reports' documentation, REST, and RPC responses are recorded in their `## Evidence` sections. No private key or transaction was used.
+
+### Fixed / no longer reproduces
+
+None in this pass; no feedback files were removed or renumbered.
+
 ## Scope and method
 
 Pass 3 re-read `../codex-run2.log` and repeated the pass-2 reproductions on 2026-10-28, 08:05–08:08 UTC. All requests were read-only: Hideki GraphQL and RPC (`eth_chainId`, `eth_call`, `eth_estimateGas`, `eth_getBalance`, `eth_getBlockByNumber`), staging REST GETs, and documentation GETs. No transaction was broadcast; no private key was used. `from` in simulations was a plain address. SDK 0.32.1 source and ABIs were checked against live responses. Tools were Go 1.27.3, go-ethereum 1.14.13, curl 8.14.1, and Python 3.13.5.
@@ -13,7 +21,7 @@ Pass 3 re-read `../codex-run2.log` and repeated the pass-2 reproductions on 2026
 5. **Perp revert reference — Normal.** During the 08:05 UTC probe, an unfunded BTC perp `placeOrder` `eth_call` and `eth_estimateGas` both returned `0x08c379a0...`, decoding to `ERC20: insufficient allowance`. The linked live Errors page did not contain perp selectors `0x714b36d6` or `0x3a23d825`, though the Perps guide names them. Keccak-256 of `MaxPositionSizeExceeded()`, `InsufficientCollateral()`, and `ImmediateOrCancelNoFill()` confirmed `0x714b36d6`, `0x3a23d825`, and `0xd48c4403`; only the last appeared on the Errors page. See [05](../feedback/05-perp-revert-reference.md).
 6. **Hideki gas onboarding — Normal.** The Perps guide gives the app's linked-bot gas transfer path. The general Quick Start's public STT faucet instructions are explicitly under Shannon 50312; `testnet.somnia.network` labeled its page `Testnet, Shannon` at 08:07:22Z. Hideki RPC `eth_chainId` was `0xc4cf` (50383). We did not attempt a faucet claim and do not assert no separate faucet exists. See [06](../feedback/06-hideki-gas-onboarding.md).
 
-All six pass-2 items still reproduced today; none was dropped.
+All six pass-2 items still reproduced on 2026-10-28; none was dropped in pass 3.
 
 ## Checks that found no issue
 

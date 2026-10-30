@@ -20,9 +20,36 @@ The perps guide explains the indexer mark update cadence and tells readers when 
 
 ## Actual
 
-All three indexer marks and update timestamps stayed unchanged across two samples 76 seconds apart, while each pool returned `ok=true` and a changing mark. The [perps developer guide](https://app.testnet.dreamdex.io/docs/developers/perps-testnet/README.md) does not explain this cadence.
+On 2026-10-30, all five sampled indexer marks and update timestamps stayed unchanged across three samples spanning 120 seconds, while each pool returned `ok=true` and a changing mark. The earlier three-market, two-sample observation also remains below. The [perps developer guide](https://app.testnet.dreamdex.io/docs/developers/perps-testnet/README.md) does not explain this cadence.
 
 ## Evidence
+
+Re-verified 2026-10-30 03:37 UTC. Three samples started 60 seconds apart (03:35:23, 03:36:23, 03:37:23 UTC). All five indexer marks and timestamps stayed fixed while all five pool marks moved; every pool returned `ok=true`. This is a sampled delay, not a measured update cadence.
+
+| UTC sample | Market | Indexer mark | `markPriceUpdatedAt` | Age | Live pool mark |
+|---|---|---:|---:|---:|---:|
+| 2026-10-30T03:35:23Z | BTC | 77353.2443620564865 | 1793329904 | 1419 s | 77661.0623116485045 |
+| 2026-10-30T03:35:23Z | ETH | 2209.223360003374 | 1793330358 | 965 s | 2220.2553269837225 |
+| 2026-10-30T03:35:23Z | SOL | 94.935428677001 | 1793328856 | 2467 s | 96.36147015697 |
+| 2026-10-30T03:35:23Z | DOGE | 0.0749327873805 | 1793330082 | 1241 s | 0.0755561079285 |
+| 2026-10-30T03:35:23Z | AVAX | 8.317315649009 | 1793330084 | 1239 s | 8.393319434046 |
+| 2026-10-30T03:36:23Z | BTC | 77353.2443620564865 | 1793329904 | 1479 s | 77671.0413085312245 |
+| 2026-10-30T03:36:23Z | ETH | 2209.223360003374 | 1793330358 | 1025 s | 2220.8485413094245 |
+| 2026-10-30T03:36:23Z | SOL | 94.935428677001 | 1793328856 | 2527 s | 96.3489117623705 |
+| 2026-10-30T03:36:23Z | DOGE | 0.0749327873805 | 1793330082 | 1301 s | 0.075569972991 |
+| 2026-10-30T03:36:23Z | AVAX | 8.317315649009 | 1793330084 | 1299 s | 8.3955079182485 |
+| 2026-10-30T03:37:23Z | BTC | 77353.2443620564865 | 1793329904 | 1539 s | 77787.824378077572 |
+| 2026-10-30T03:37:23Z | ETH | 2209.223360003374 | 1793330358 | 1085 s | 2221.83814248459 |
+| 2026-10-30T03:37:23Z | SOL | 94.935428677001 | 1793328856 | 2587 s | 96.348380243171 |
+| 2026-10-30T03:37:23Z | DOGE | 0.0749327873805 | 1793330082 | 1361 s | 0.0755956062025 |
+| 2026-10-30T03:37:23Z | AVAX | 8.317315649009 | 1793330084 | 1359 s | 8.393822509263 |
+
+Raw first-sample responses (five-market GraphQL result and BTC `eth_call`):
+
+```json
+{"data":{"Market":[{"baseSymbol":"DOGE","poolAddress":"0xc410012e39765cd5f772e84bacb19554aec040df","markPrice":"74932787380500000","markPriceUpdatedAt":"1793330082"},{"baseSymbol":"AVAX","poolAddress":"0xde9762b6b441133d1314c68864ae4e63a6ee45c7","markPrice":"8317315649009000000","markPriceUpdatedAt":"1793330084"},{"baseSymbol":"SOL","poolAddress":"0xb483ec1fb34996638677c20ab087b16f1896fa53","markPrice":"94935428677001000000","markPriceUpdatedAt":"1793328856"},{"baseSymbol":"ETH","poolAddress":"0xd6cb1dd58580b84d76068ac21594219ce03aeddf","markPrice":"2209223360003374000000","markPriceUpdatedAt":"1793330358"},{"baseSymbol":"BTC","poolAddress":"0x4181dd08e73bbcdd1ba3e615a18f6abd941b94c0","markPrice":"77353244362056486500000","markPriceUpdatedAt":"1793329904"}]}}
+{"jsonrpc":"2.0","id":1,"result":"0x000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000107203be628065cecf20"}
+```
 
 | UTC sample | Market | Indexer mark | Age at sample | Pool mark |
 |---|---|---:|---:|---:|
@@ -37,4 +64,4 @@ The indexer `markPriceUpdatedAt` values remained `1793171503` (BTC), `1793171958
 
 ## Environment
 
-2026-10-28 UTC; Hideki testnet chain 50383; SDK 0.32.1 ABI reference; GraphQL and `eth_call` only; no wallet or transaction.
+2026-10-30 03:35–03:37 UTC; Somnia Tokyo testnet (Hideki, chain 50383); wallet: n/a, read-only; GraphQL and pool `eth_call`; SDK 0.32.1 ABI reference; no transaction sent.
